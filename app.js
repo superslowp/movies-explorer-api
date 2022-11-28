@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { cors } = require('./middlewares/cors');
-const routes = require('./routes/index');
+const router = require('./routes/index');
 const errorsHandler = require('./utils/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/moviesdb');
 
-app.use(routes);
+app.use(router);
 
 app.use(errorLogger);
 app.use(errors());

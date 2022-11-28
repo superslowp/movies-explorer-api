@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const usersRouter = require('./userRoutes');
 const moviesRouter = require('./movieRoutes');
-const { createUser, login, logout } = require('../controllers/userController');
+const { createUser, login, signout } = require('../controllers/userController');
 const { validateLogin, validateRegister } = require('../utils/validators/userValidator');
 const NotFoundError = require('../utils/errors/NotFoundError');
 
@@ -11,7 +11,8 @@ router.post('/signup', validateRegister, createUser);
 router.post('/signin', validateLogin, login);
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
-router.get('/logout', logout);
+router.get('/signout', signout);
+
 router.use('*', () => {
   throw new NotFoundError('Неправильный URL');
 });
