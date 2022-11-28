@@ -1,7 +1,7 @@
 {
-  "name": "express-mesto-gha",
+  "name": "movies-explorer-api",
   "version": "1.0.0",
-  "description": "Проект Mesto бэкенд, 14я практическая работа Яндекс.Практикум",
+  "description": "API для дипломной работы Яндекс.Практикум Web-Разработка",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
