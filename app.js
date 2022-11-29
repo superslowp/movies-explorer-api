@@ -11,20 +11,16 @@ const { cors } = require('./middlewares/cors');
 const router = require('./routes/index');
 const errorsHandler = require('./utils/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { MONGO_BASE_URL, RATE_LIMIT_CONFIG } = require('./utils/constants');
 
-const { MONGO_URL = 'mongodb://localhost:27017/moviesdb', PORT = 3000 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const limiter = rateLimit(RATE_LIMIT_CONFIG);
 app.use(limiter);
-app.use(helmet());
 app.use(requestLogger);
+app.use(helmet());
 
 app.use(cors);
 
@@ -32,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-mongoose.connect(MONGO_URL);
+mongoose.connect(MONGO_BASE_URL);
 
 app.use(router);
 
