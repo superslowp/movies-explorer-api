@@ -7,12 +7,6 @@ const NotFoundError = require('../utils/errors/NotFoundError');
 const ConfilctError = require('../utils/errors/ConflictError');
 const { JWT_SECRET } = require('../utils/constants');
 
-module.exports.getUsers = (req, res, next) => {
-  userModel.find({})
-    .then((users) => res.send(users))
-    .catch(next);
-};
-
 module.exports.createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
   bcrypt.hash(password, 10)
