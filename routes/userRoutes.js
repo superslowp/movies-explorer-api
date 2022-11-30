@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 const usersRouter = require('express').Router();
 
 const { updateUser, getUserInfo } = require('../controllers/userController');

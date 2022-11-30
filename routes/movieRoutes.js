@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 const movieRouter = require('express').Router();
 const { validateMovieData, validateMovieId } = require('../utils/validators/movieValidator');
 const { getMovies, addMovie, deleteMovie } = require('../controllers/movieController');

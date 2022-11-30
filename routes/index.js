@@ -9,8 +9,11 @@ const auth = require('../middlewares/auth');
 
 router.post('/signup', validateRegister, createUser);
 router.post('/signin', validateLogin, login);
-router.use('/users', auth, usersRouter);
-router.use('/movies', auth, moviesRouter);
+
+router.use(auth);
+
+router.use('/users', usersRouter);
+router.use('/movies', moviesRouter);
 router.get('/signout', signout);
 
 router.use('*', () => {

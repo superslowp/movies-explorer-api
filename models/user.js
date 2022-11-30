@@ -40,5 +40,4 @@ userSchema.statics.checkUser = function checkUser({ email, password }) {
     });
 };
 
-// eslint-disable-next-line new-cap
-module.exports = new mongoose.model('user', userSchema);
+module.exports = mongoose.model('user', userSchema);

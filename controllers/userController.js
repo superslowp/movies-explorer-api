@@ -1,5 +1,3 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-unused-vars */
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/user');
@@ -8,9 +6,21 @@ const ConfilctError = require('../utils/errors/ConflictError');
 const { JWT_SECRET } = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name,
+    about,
+    avatar,
+    email,
+    password,
+  } = req.body;
   bcrypt.hash(password, 10)
-    .then((hash) => userModel.create({ name, about, avatar, email, password: hash }))
+    .then((hash) => userModel.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => res.send({
       user: {
         email: user.email,
@@ -30,10 +40,10 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, about } = req.body;
+  const { name, email } = req.body;
   userModel.findByIdAndUpdate(
     req.user._id,
-    { name, about },
+    { name, email },
     {
       new: true,
       runValidators: true,
