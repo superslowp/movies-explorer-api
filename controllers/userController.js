@@ -86,7 +86,15 @@ module.exports.getUserInfo = (req, res, next) => {
 };
 
 module.exports.signout = (_, res, next) => {
-  res.clearCookie('jwt').send({ message: 'Вы вышли из профиля' })
+  res
+    .clearCookie(
+      'jwt',
+      {
+        sameSite: 'none',
+        secure: true,
+      },
+    )
+    .send({ message: 'Вы вышли из профиля' })
     .catch((err) => {
       next(err);
     });
